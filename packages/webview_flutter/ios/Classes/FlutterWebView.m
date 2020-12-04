@@ -132,6 +132,8 @@
     [self onLoadData:call result:result];
   } else if ([[call method] isEqualToString:@"loadDataBase64"]) {
     [self onLoadDataBase64:call result:result];
+  } else if ([[call method] isEqualToString:@"loadFileUrl"]) {
+    [self onLoadFileUrl:call result:result];
   } else if ([[call method] isEqualToString:@"canGoBack"]) {
     [self onCanGoBack:call result:result];
   } else if ([[call method] isEqualToString:@"canGoForward"]) {
@@ -290,6 +292,24 @@
     NSLog(@"Setting data is not supported for Flutter WebViews prior to iOS 9.");
   }
 
+  result(nil);
+}
+
+- (void)onLoadFileUrl:(FlutterMethodCall*)call result:(FlutterResult)result {
+  NSDictionary<NSString*, id>* arguments = [call arguments];
+  if (!arguments) {
+    result([FlutterError errorWithCode:@"loadFileUrl_failed"
+                               message:@"No arguments passed to method"
+                               details:nil]);
+    return;
+  }
+
+  NSString* url = arguments[@"url"];
+
+  [_webView
+    loadFileURL:[NSURL URLWithString:@"file://app/index.html"]
+    allowingReadAccessToURL:[NSURL URLWithString:@"file://app"]];
+    
   result(nil);
 }
 

@@ -113,6 +113,16 @@ class MethodChannelWebViewPlatform implements WebViewPlatformController {
   }
 
   @override
+  Future<void> loadFileUrl(
+    String url
+  ) async {
+    assert(url != null);
+    return _channel.invokeMethod<void>('loadFileUrl', <String, dynamic>{
+      'url': url,
+    });
+  }
+
+  @override
   Future<String> currentUrl() => _channel.invokeMethod<String>('currentUrl');
 
   @override

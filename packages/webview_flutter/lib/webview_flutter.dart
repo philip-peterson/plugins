@@ -648,6 +648,13 @@ class WebViewController {
     return _webViewPlatformController.loadDataBase64(data, mimeType, baseUrl);
   }
 
+  /// Do some stuff
+  Future<void> loadFileUrl(
+    String baseUrl
+  ) async {
+    return _webViewPlatformController.loadFileUrl(baseUrl);
+  }
+
   /// Accessor to the current URL that the WebView is displaying.
   ///
   /// If [WebView.initialUrl] was never specified, returns `null`.

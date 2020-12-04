@@ -182,6 +182,13 @@ abstract class WebViewPlatformController {
         "WebView loadUrl is not implemented on the current platform");
   }
 
+  Future<void> loadFileUrl(
+    String url
+  ) {
+    throw UnimplementedError(
+        "WebView loadFileUrl is not implemented on the current platform");
+  }
+
   /// Loads the specified content data into the WebView.
   ///
   /// The string `data` will be interpreted as a UTF-8 string.

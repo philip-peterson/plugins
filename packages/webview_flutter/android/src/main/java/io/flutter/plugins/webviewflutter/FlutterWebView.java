@@ -180,6 +180,9 @@ public class FlutterWebView implements PlatformView, MethodCallHandler {
       case "loadDataBase64":
         loadDataBase64(methodCall, result);
         break;
+      case "loadFileUrl":
+        loadFileUrl(methodCall, result);
+        break;
       case "updateSettings":
         updateSettings(methodCall, result);
         break;
@@ -269,6 +272,15 @@ public class FlutterWebView implements PlatformView, MethodCallHandler {
     // support for base64 seems to be broken.
     final String url = String.format("data:%s;base64,%s", mimeType, data);
     webView.loadUrl(url);
+    result.success(null);
+  }
+
+  @SuppressWarnings("unchecked")
+  private void loadFileUrl(MethodCall methodCall, Result result) {
+    Map<String, Object> request = (Map<String, Object>) methodCall.arguments;
+    String data = (String) request.get("url");
+    
+    webView.loadFileUrl(url);
     result.success(null);
   }
 
